@@ -1,7 +1,82 @@
+@import 'package:angular_components/css/material/material';
+@import 'package:angular_components/material_button/mixins';
+
+$raised: 'material-button[raised]';
+$not-raised: 'material-button:not([raised])';
+
+@include button-background-color($raised + '.blue', $mat-blue);
+@include button-background-color($raised + '.green', $mat-green);
+@include button-background-color($raised + '.yellow', $mat-yellow);
+@include button-background-color($raised + '.indigo', $mat-indigo);
+@include button-background-color($raised + '.red', $mat-red);
+
+@include button-color($raised + '.blue', $mat-white);
+@include button-color($raised + '.green', $mat-white);
+@include button-color($raised + '.yellow', $mat-black);
+@include button-color($raised + '.indigo', $mat-white);
+@include button-color($raised + '.red', $mat-white);
+
+$item-size: 50px;
+
+.items-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  height: 500px;
+}
+
 .item {
-  width: 50px;
-  height: 50px;
+  width: $item-size;
+  height: $item-size;
+  margin: 5px;
   display: inline-block;
   text-align: center;
-  vertical-align: middle
+  vertical-align: middle;
+  border: 1px solid black;
+}
+
+.input-wrapper {
+  margin-top: 20px;
+}
+
+.input-message-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+
+  .flex-item {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    &.message {
+      align-self: center;      
+    }
+  }
+}
+
+.each-item {
+  position: relative;
+  margin-right: 50px;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  .arrow, .item-index {
+    position: absolute;
+    top: 0;
+    line-height: 62px;
+  }
+  .arrow {
+    right: -19px;
+    color: $mat-red;
+  }
+  .item-index {
+    right: 62px;
+    line-height: 62px;
+  }
 }

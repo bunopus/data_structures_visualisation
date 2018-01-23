@@ -6,7 +6,10 @@ import 'src/chap_02/array/array_component.dart';
 
 @Component(
   selector: 'my-app',
-  styleUrls: const ['app_component.css'],
+  styleUrls: const [
+    'package:angular_components/app_layout/layout.scss.css',
+    'app_component.css'
+  ],
   templateUrl: 'app_component.html',
   directives: const [
     materialDirectives,
