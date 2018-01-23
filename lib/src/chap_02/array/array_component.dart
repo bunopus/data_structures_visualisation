@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:angular/angular.dart';
+import 'package:angular_components/material_button/material_button.dart';
+import 'package:angular_components/material_input/material_input.dart';
 
 import '../classes/item.dart';
 
@@ -9,6 +11,8 @@ import '../classes/item.dart';
   styleUrls: const ['array_component.css'],
   templateUrl: 'array_component.html',
   directives: const [
+    MaterialButtonComponent,
+    materialInputDirectives,
     CORE_DIRECTIVES,
   ]
 )

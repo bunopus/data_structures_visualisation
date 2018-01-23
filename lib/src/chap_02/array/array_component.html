@@ -1,6 +1,20 @@
-<div *ngFor="let item of items; let i=index">
-  <span>{{i}}</span>
-  <span class="item" [ngStyle]="{'background-color': item.color}">
-    {{item.number}}
-  </span>
+<div class="button-wrapper">
+  <material-button raised class="blue">New</material-button>
+  <material-button raised class="green">Fill</material-button>
+  <material-button raised class="yellow">Inset</material-button>
+  <material-button raised class="indigo">Find</material-button>
+  <material-button raised class="red">Delete</material-button>
+</div>
+
+<div class="input-wrapper">
+  <material-input label="Write Your Number"></material-input>
+</div>
+
+<div class="items-wrapper">
+    <div *ngFor="let item of items; let i=index">
+        <span>{{i}}</span>
+        <span class="item" [ngStyle]="{'background-color': item.color}">
+          {{item.number}}
+        </span>
+      </div>
 </div>
