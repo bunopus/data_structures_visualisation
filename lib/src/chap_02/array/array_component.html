@@ -1,0 +1,6 @@
+<div *ngFor="let item of items; let i=index">
+  <span>{{i}}</span>
+  <span class="item" [ngStyle]="{'background-color': item.color}">
+    {{item.number}}
+  </span>
+</div>
