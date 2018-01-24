@@ -1,20 +1,27 @@
 <div class="button-wrapper">
-  <material-button raised class="blue">New</material-button>
+  <material-button raised class="blue" (click)="testIndex()">New</material-button>
   <material-button raised class="green">Fill</material-button>
-  <material-button raised class="yellow">Inset</material-button>
+  <material-button raised class="yellow">Insert</material-button>
   <material-button raised class="indigo">Find</material-button>
   <material-button raised class="red">Delete</material-button>
 </div>
 
-<div class="input-wrapper">
-  <material-input label="Write Your Number"></material-input>
+<div class="input-message-wrapper">
+  <div class="flex-item input-wrapper">
+    <material-input label="Write Your Number"></material-input>
+  </div>
+  <div class="flex-item message">
+    <p>{{message}}</p>
+  </div>
 </div>
 
+
 <div class="items-wrapper">
-    <div *ngFor="let item of items; let i=index">
-        <span>{{i}}</span>
-        <span class="item" [ngStyle]="{'background-color': item.color}">
-          {{item.number}}
-        </span>
-      </div>
+    <div class="each-item" *ngFor="let item of items; let i=index">
+      <span>{{i}}</span>
+      <span class="item" [ngStyle]="{'background-color': item.color}">
+        {{item.number}}
+      </span>
+      <i class="arrow material-icons" *ngIf="listIndex == i">arrow_back</i>      
+    </div>
 </div>

@@ -19,8 +19,12 @@ import '../classes/item.dart';
 class ArrayComponent implements OnInit {
   List<Item> items;
   Random random = new Random();
+  String message;
+  int listIndex;
   ArrayComponent() {
+    message = 'Press any button';
     items = new List<Item>();
+    listIndex = 0;
     for(int i = 0; i < 10; i ++) {
       items.add(new Item(random.nextInt(1000)));
     }
@@ -28,4 +32,11 @@ class ArrayComponent implements OnInit {
 
   @override
   void ngOnInit() {}
+
+  void testIndex() {
+    if(listIndex == items.length - 1)
+      listIndex = 0;
+    else 
+      listIndex ++;
+  }
 }

@@ -16,10 +16,59 @@ $not-raised: 'material-button:not([raised])';
 @include button-color($raised + '.indigo', $mat-white);
 @include button-color($raised + '.red', $mat-white);
 
+$item-size: 50px;
+
+.items-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: center;
+  height: 50vh;
+}
+
 .item {
-  width: 50px;
-  height: 50px;
+  width: $item-size;
+  height: $item-size;
+  margin: 5px;
   display: inline-block;
   text-align: center;
-  vertical-align: middle
+  vertical-align: middle;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  border: 1px solid black;
+}
+
+.input-wrapper {
+  margin-top: 20px;
+}
+
+.input-message-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  align-items: flex-start;
+
+  .flex-item {
+    order: 0;
+    flex: 1 1 auto;
+    align-self: auto;
+    &.message {
+      align-self: center;      
+    }
+  }
+}
+
+.each-item {
+  position: relative;
+  .arrow {
+    position: absolute;
+    top: 14px;
+    right: -19px;
+    color: $mat-red;
+  }
 }
