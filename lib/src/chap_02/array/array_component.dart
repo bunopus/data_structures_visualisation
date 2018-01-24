@@ -28,10 +28,10 @@ class ArrayComponent implements OnInit {
   ArrayComponent() {
     message = 'Press any button';
     _codePart = 1;
-    items = new List<Item>();
+    items = new List<Item>(20);
     listIndex = 0;
-    for(int i = 0; i < 20; i ++) {
-      items.add(new Item(random.nextInt(1000)));
+    for(int i = 0; i < 10; i ++) {
+      items[i] = new Item(random.nextInt(1000));
     }
   }
 

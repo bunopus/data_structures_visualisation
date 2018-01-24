@@ -29,7 +29,10 @@
 <div class="items-wrapper">
   <div class="each-item" *ngFor="let item of items; let i=index">
     <span class="item-index">{{i}}</span>
-    <span class="item"></span>
+    <span class="item" *ngIf="item == null"></span>
+    <span class="item" *ngIf="item !== null" [ngStyle]="{'background-color': item.color}">
+      {{item.number}}
+    </span>
     <i class="arrow material-icons" *ngIf="listIndex == i">arrow_back</i>      
   </div>
 </div>
