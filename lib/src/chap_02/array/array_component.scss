@@ -24,7 +24,7 @@ $item-size: 50px;
   flex-wrap: wrap;
   justify-content: center;
   align-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   height: 50vh;
 }
 
@@ -35,9 +35,6 @@ $item-size: 50px;
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  order: 0;
-  flex: 0 1 auto;
-  align-self: auto;
   border: 1px solid black;
 }
 
@@ -65,10 +62,21 @@ $item-size: 50px;
 
 .each-item {
   position: relative;
-  .arrow {
+  margin-right: 50px;
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+  .arrow, .item-index {
     position: absolute;
-    top: 14px;
+    top: 0;
+    line-height: 62px;
+  }
+  .arrow {
     right: -19px;
     color: $mat-red;
+  }
+  .item-index {
+    right: 62px;
+    line-height: 62px;
   }
 }
