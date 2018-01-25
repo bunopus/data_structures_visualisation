@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:angular/angular.dart';
 import 'package:angular_components/material_button/material_button.dart';
 import 'package:angular_components/material_input/material_input.dart';
 
-import '../classes/item.dart';
+import '../classes/array_item.dart';
 
 @Component(
   selector: 'chap02-array',
@@ -17,60 +15,71 @@ import '../classes/item.dart';
   ]
 )
 class ArrayComponent implements OnInit {
-  List<Item> items;
-  Random random = new Random();
+  ArrayItem arrayItem;
   String message;
   int listIndex;
   int _codePart;
-  String userNumber;
+  String userInput;
   int _totalArraySize;
 
   ArrayComponent() {
     message = 'Press any button';
     _codePart = 1;
-    items = new List<Item>(20);
+    arrayItem = new ArrayItem(20);
+    arrayItem.fillArray(10);
     listIndex = 0;
-    for(int i = 0; i < 10; i ++) {
-      items[i] = new Item(random.nextInt(1000));
-    }
   }
 
   @override
   void ngOnInit() {}
 
-  void testIndex() {
-    if(listIndex == items.length - 1)
-      listIndex = 0;
-    else 
-      listIndex ++;
-  }
-
   void newArray() {
     switch(_codePart) {
-      case 1:
-        message = 'Enter size of array to create';
-        _totalArraySize = int.parse(userNumber);
-        _codePart = 2;
-        return;
-      case 2: 
-        if(userNumber.length > 0) {
-          message = 'Will create empty arrayw with $userNumber cells';
-          _codePart = 3;
-        } else {
-          _codePart = 1;
-        }
-        return;
-      case 3:
-        for(int i = 0; i < _totalArraySize; i++) {
-          items = new List<Item>(_totalArraySize);
-          message = 'New array created; total items 0';
-        }
-        _codePart = 6;
-        return;        
-      case 6: 
-        message = 'Press any button';
-        _codePart = 1;
-        return;
+     case 1:
+       message = 'Enter size of array to create';
+       _codePart = 2;
+       return;
+     case 2:
+       _totalArraySize = int.parse(userInput);
+       if(_totalArraySize > 0) {
+         message = 'Will create empty arrayw with $_totalArraySize cells';
+         _codePart = 3;
+       } else {
+         _codePart = 1;
+       }
+       return;
+     case 3:
+       for(int i = 0; i < _totalArraySize; i++) {
+         arrayItem = new ArrayItem(_totalArraySize);
+         message = 'New array created; total items ${arrayItem.numberOfElements}';
+       }
+       _codePart = 6;
+       return;
+     case 6:
+       message = 'Press any button';
+       _codePart = 1;
+       return;
+   }
+  }
+
+  // TODO not complete
+  void fillArray(){
+    int fillSize = int.parse(userInput);
+    if(fillSize <= arrayItem.size) {
+      arrayItem.fillArray(fillSize);
+    } else {
+      message = "You can't fill array more then array size ${arrayItem.size}";
     }
   }
+
+  // TODO not complete
+  void insertArray(){
+    arrayItem.insertToArray(int.parse(userInput));
+  }
+
+  // TODO not complete
+  void findItem(){}
+
+  // TODO not complete  
+  void deleteItem(){}
 }
