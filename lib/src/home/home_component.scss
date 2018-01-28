@@ -1,0 +1,27 @@
+.image {
+  background: url(https://webdev.dartlang.org/assets/angulardart-5e7ebca88c5584b1da301f9f9e61d1e7d4f0688b6a9222991cde3bada950088c.svg) no-repeat center center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.text {
+  font-size: 90px;
+  position: relative;
+  left: -30px
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+
+.flex-item {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: center;
+}
