@@ -22,6 +22,7 @@ class ArrayComponent implements OnInit {
   String userInput;
   int _totalArraySize;
   final String initialMessage = 'Press any button';
+  int _fillSize;
 
   ArrayComponent() {
     message = initialMessage;
@@ -29,6 +30,10 @@ class ArrayComponent implements OnInit {
     arrayItem = new ArrayItem(20);
     arrayItem.fillArray(10);
     indexList = 0;
+  }
+
+  int get fillSize {
+    return int.parse(userInput);
   }
 
   @override
@@ -54,9 +59,9 @@ class ArrayComponent implements OnInit {
          arrayItem = new ArrayItem(_totalArraySize);
          message = 'New array created; total items ${arrayItem.numberOfElements}';
        }
-       _codePart = 6;
+       _codePart = 4;
        return;
-     case 6:
+     case 4:
        message = initialMessage;
        _codePart = 1;
        return;
@@ -65,11 +70,29 @@ class ArrayComponent implements OnInit {
 
   // TODO not complete
   void fillArray(){
-    int fillSize = int.parse(userInput);
-    if(fillSize <= arrayItem.size) {
-      arrayItem.fillArray(fillSize);
-    } else {
-      message = "You can't fill array more then array size ${arrayItem.size}";
+    switch(_codePart) {
+      case 1:
+        message = 'Enter number of items to fill in';
+        _codePart = 2;
+        return;
+      case 2:
+        if(fillSize <= arrayItem.size) {
+          message = 'Will fill in $fillSize items';    
+          _codePart = 3;
+        } else {
+          message = "You can't fill array more then array size ${arrayItem.size}";
+          _codePart = 1;
+        }
+        return;
+      case 3:
+        arrayItem.fillArray(fillSize);      
+        message = 'Fill complete; Total items = $fillSize';
+        _codePart = 4;
+        return;  
+      case 4:
+        message = initialMessage;
+        _codePart = 1;  
+        return;
     }
   }
 
