@@ -17,17 +17,18 @@ import '../classes/array_item.dart';
 class ArrayComponent implements OnInit {
   ArrayItem arrayItem;
   String message;
-  int listIndex;
+  int indexList;
   int _codePart;
   String userInput;
   int _totalArraySize;
+  final String initialMessage = 'Press any button';
 
   ArrayComponent() {
-    message = 'Press any button';
+    message = initialMessage;
     _codePart = 1;
     arrayItem = new ArrayItem(20);
     arrayItem.fillArray(10);
-    listIndex = 0;
+    indexList = 0;
   }
 
   @override
@@ -56,7 +57,7 @@ class ArrayComponent implements OnInit {
        _codePart = 6;
        return;
      case 6:
-       message = 'Press any button';
+       message = initialMessage;
        _codePart = 1;
        return;
    }
@@ -78,8 +79,74 @@ class ArrayComponent implements OnInit {
   }
 
   // TODO not complete
-  void findItem(){}
+  void findItem(){
+    int itemToFind = int.parse(userInput);
+
+    switch(_codePart) {
+      case 1:
+        message = 'Enter key of item to find';
+        _codePart = 2;
+        return;
+      case 2:
+        message = 'Looking for item with key $itemToFind';
+        _codePart = 3;
+        return;
+      case 3:
+        if(arrayItem.items[indexList].number == itemToFind) {
+          message = 'Have found item with key $itemToFind';
+          _codePart = 1;
+          indexList = 0;
+          return;
+        } else {
+          indexList ++;
+          message = 'Checking next cell; index $indexList';
+        }
+        break;
+    }
+  }
 
   // TODO not complete  
-  void deleteItem(){}
+  void deleteItem(){
+    int itemToFind = int.parse(userInput);
+    switch(_codePart) {
+      case 1:
+        message = 'Enter key of item to delete';
+        _codePart = 2;
+        return;
+      case 2:
+        message = 'Loking for item with key $itemToFind';
+        _codePart = 3;
+        return;
+      case 3:
+        if(arrayItem.items[indexList].number == itemToFind) {
+          message = 'Have found and delete item with key $itemToFind';
+          arrayItem.items[indexList] = null;
+          _codePart = 4;
+          return;
+        } else {
+          indexList ++;
+          message = 'Checking index = $indexList for item';
+        }
+        return;
+      case 4:
+        if (indexList < arrayItem.numberOfElements - 1) {
+          indexList += 1;
+          arrayItem.items[(indexList - 1)] = arrayItem.items[indexList];
+          arrayItem.items[indexList] = null;
+          message = 'Shifted item from ${indexList+1} to $indexList';          
+        } else {
+          arrayItem.numberOfElements -= 1;
+          message = 'Shifting complete. Total items = ${arrayItem.numberOfElements}';
+          indexList = arrayItem.numberOfElements - 1;
+          _codePart = 5;
+          return;
+        }
+        print('Need to do Shifting');
+        break;
+      case 5: 
+        _codePart = 1;
+        message = initialMessage;
+        indexList = 0;  
+    }    
+  }
 }
