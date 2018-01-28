@@ -5,15 +5,14 @@ import 'package:angular_components/material_input/material_input.dart';
 import '../classes/array_item.dart';
 
 @Component(
-  selector: 'chap02-array',
-  styleUrls: const ['array_component.css'],
-  templateUrl: 'array_component.html',
-  directives: const [
-    MaterialButtonComponent,
-    materialInputDirectives,
-    CORE_DIRECTIVES,
-  ]
-)
+    selector: 'chap02-array',
+    styleUrls: const ['array_component.css'],
+    templateUrl: 'array_component.html',
+    directives: const [
+      MaterialButtonComponent,
+      materialInputDirectives,
+      CORE_DIRECTIVES,
+    ])
 class ArrayComponent implements OnInit {
   ArrayItem arrayItem;
   String message;
@@ -22,7 +21,10 @@ class ArrayComponent implements OnInit {
   String userInput;
   int _totalArraySize;
   final String initialMessage = 'Press any button';
-  int _fillSize;
+  final String errorMessage = 'This is a not a nubmer';
+  int itemToFind;
+  int fillSize;
+  int insertItem;
 
   ArrayComponent() {
     message = initialMessage;
@@ -32,122 +34,161 @@ class ArrayComponent implements OnInit {
     indexList = 0;
   }
 
-  int get fillSize {
-    return int.parse(userInput);
-  }
-
   @override
   void ngOnInit() {}
 
   void newArray() {
-    switch(_codePart) {
-     case 1:
-       message = 'Enter size of array to create';
-       _codePart = 2;
-       return;
-     case 2:
-       _totalArraySize = int.parse(userInput);
-       if(_totalArraySize > 0) {
-         message = 'Will create empty arrayw with $_totalArraySize cells';
-         _codePart = 3;
-       } else {
-         _codePart = 1;
-       }
-       return;
-     case 3:
-       for(int i = 0; i < _totalArraySize; i++) {
-         arrayItem = new ArrayItem(_totalArraySize);
-         message = 'New array created; total items ${arrayItem.numberOfElements}';
-       }
-       _codePart = 4;
-       return;
-     case 4:
-       message = initialMessage;
-       _codePart = 1;
-       return;
-   }
+    switch (_codePart) {
+      case 1:
+        message = 'Enter size of array to create';
+        _codePart = 2;
+        return;
+      case 2:
+        try {
+          _totalArraySize = int.parse(userInput);
+          if (_totalArraySize > 0) {
+            message = 'Will create empty array with $_totalArraySize cells';
+            _codePart = 3;
+          } else {
+            _codePart = 1;
+          }
+        } catch (e) {
+          message = errorMessage;
+          _codePart = 1;
+        }
+        return;
+      case 3:
+        for (int i = 0; i < _totalArraySize; i++) {
+          arrayItem = new ArrayItem(_totalArraySize);
+          message =
+              'New array created; total items ${arrayItem.numberOfElements}';
+        }
+        _codePart = 4;
+        return;
+      case 4:
+        message = initialMessage;
+        _codePart = 1;
+        return;
+    }
   }
 
-  // TODO not complete
-  void fillArray(){
-    switch(_codePart) {
+  void fillArray() {
+    switch (_codePart) {
       case 1:
         message = 'Enter number of items to fill in';
         _codePart = 2;
         return;
       case 2:
-        if(fillSize <= arrayItem.size) {
-          message = 'Will fill in $fillSize items';    
-          _codePart = 3;
-        } else {
-          message = "You can't fill array more then array size ${arrayItem.size}";
+        try {
+          fillSize = int.parse(userInput);
+          if (fillSize <= arrayItem.size) {
+            message = 'Will fill in $fillSize items';
+            _codePart = 3;
+          } else {
+            message =
+                "You can't fill array more then array size ${arrayItem.size}";
+            _codePart = 1;
+          }
+        } catch (error) {
+          message = errorMessage;
           _codePart = 1;
         }
         return;
       case 3:
-        arrayItem.fillArray(fillSize);      
+        arrayItem.fillArray(fillSize);
         message = 'Fill complete; Total items = $fillSize';
         _codePart = 4;
-        return;  
+        return;
       case 4:
         message = initialMessage;
-        _codePart = 1;  
+        _codePart = 1;
         return;
     }
   }
 
-  // TODO not complete
-  void insertArray(){
-    arrayItem.insertToArray(int.parse(userInput));
+  void insertArray() {
+    switch (_codePart) {
+      case 1:
+        message = 'Enter key of item to insert';
+        _codePart = 2;
+        return;
+      case 2:
+        try {
+          insertItem = int.parse(userInput);
+          arrayItem.insertToArray(insertItem);
+          int lastIndex = arrayItem.numberOfElements - 1;
+          message = 'Insert item with key $insertItem at index $lastIndex';
+          indexList = lastIndex;
+          _codePart = 3;
+        } catch (e) {
+          message = errorMessage;
+          _codePart = 1;
+        }
+        return;
+      case 3:
+        indexList = 0;
+        _codePart = 1;
+        message = initialMessage;
+    }
   }
 
-  // TODO not complete
-  void findItem(){
-    int itemToFind = int.parse(userInput);
-
-    switch(_codePart) {
+  void findItem() {
+    switch (_codePart) {
       case 1:
         message = 'Enter key of item to find';
         _codePart = 2;
         return;
       case 2:
-        message = 'Looking for item with key $itemToFind';
-        _codePart = 3;
+        try {
+          itemToFind = int.parse(userInput);
+          message = 'Looking for item with key $itemToFind';
+          _codePart = 3;
+        } catch (e) {
+          message = errorMessage;
+          _codePart = 1;
+        }
         return;
       case 3:
-        if(arrayItem.items[indexList].number == itemToFind) {
+        if (arrayItem.items[indexList].number == itemToFind) {
           message = 'Have found item with key $itemToFind';
-          _codePart = 1;
-          indexList = 0;
+          _codePart = 4;
           return;
         } else {
-          indexList ++;
+          indexList++;
           message = 'Checking next cell; index $indexList';
         }
         break;
+      case 4:
+        message = initialMessage;
+        _codePart = 1;
+        indexList = 0;
     }
   }
 
-  // TODO not complete  
-  void deleteItem(){
-    int itemToFind = int.parse(userInput);
-    switch(_codePart) {
+  void deleteItem() {
+    switch (_codePart) {
       case 1:
         message = 'Enter key of item to delete';
         _codePart = 2;
         return;
       case 2:
-        message = 'Loking for item with key $itemToFind';
-        _codePart = 3;
+        try {
+          itemToFind = int.parse(userInput);
+          message = 'Loking for item with key $itemToFind';
+          _codePart = 3;
+        } catch (e) {
+          message = errorMessage;
+          _codePart = 1;
+        }
         return;
       case 3:
-        if(arrayItem.items[indexList].number == itemToFind) {
+        if (arrayItem.items[indexList].number == itemToFind) {
           message = 'Have found and delete item with key $itemToFind';
           arrayItem.items[indexList] = null;
           _codePart = 4;
           return;
         } else {
-          indexList ++;
+          indexList++;
           message = 'Checking index = $indexList for item';
         }
         return;
@@ -156,20 +197,20 @@ class ArrayComponent implements OnInit {
           indexList += 1;
           arrayItem.items[(indexList - 1)] = arrayItem.items[indexList];
           arrayItem.items[indexList] = null;
-          message = 'Shifted item from ${indexList+1} to $indexList';          
+          message = 'Shifted item from ${indexList+1} to $indexList';
         } else {
           arrayItem.numberOfElements -= 1;
-          message = 'Shifting complete. Total items = ${arrayItem.numberOfElements}';
+          message =
+              'Shifting complete. Total items = ${arrayItem.numberOfElements}';
           indexList = arrayItem.numberOfElements - 1;
           _codePart = 5;
           return;
         }
-        print('Need to do Shifting');
         break;
-      case 5: 
+      case 5:
         _codePart = 1;
         message = initialMessage;
-        indexList = 0;  
-    }    
+        indexList = 0;
+    }
   }
 }
