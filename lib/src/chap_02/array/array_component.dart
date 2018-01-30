@@ -155,13 +155,25 @@ class ArrayComponent implements OnInit {
           return;
         } else {
           indexList++;
-          message = 'Checking next cell; index $indexList';
+          if(indexList <= arrayItem.numberOfElements - 1) {
+            message = 'Checking next cell; index $indexList';
+          } else {
+            message = "Haven't found element";
+            _codePart = 5;
+          }
+          return;
         }
         break;
       case 4:
         message = initialMessage;
         _codePart = 1;
         indexList = 0;
+        break;
+      case 5:
+        message = initialMessage;
+        indexList = 0;
+        _codePart = 1;
+        break;
     }
   }
 
