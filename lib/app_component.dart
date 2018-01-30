@@ -3,6 +3,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 
 import 'src/chap_02/array/array_component.dart';
+import 'src/material-footer/material_footer_component.dart';
 import 'src/home/home_component.dart';
 
 @Component(
@@ -14,7 +15,8 @@ import 'src/home/home_component.dart';
   templateUrl: 'app_component.html',
   directives: const [
     materialDirectives,
-    ROUTER_DIRECTIVES
+    ROUTER_DIRECTIVES,
+    FooterComponent
   ],
   providers: const [materialProviders],
 )
