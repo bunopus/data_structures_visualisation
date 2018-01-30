@@ -13,6 +13,11 @@ body, p {
   display: inline-block;
 }
 
-material-content {
-  padding: 30px;
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  >material-content {
+    flex: 1;
+  }
 }

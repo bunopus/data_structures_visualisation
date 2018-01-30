@@ -18,6 +18,12 @@ $not-raised: 'material-button:not([raised])';
 
 $item-size: 50px;
 
+:host {
+  padding: 30px 40px;
+  max-width: 800px;
+  display: block;
+}
+
 .items-wrapper {
   display: flex;
   flex-direction: column;
