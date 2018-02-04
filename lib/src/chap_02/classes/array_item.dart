@@ -1,4 +1,4 @@
-import './item.dart';
+import 'package:DartWorkshopLafore/src/shared/item.dart';
 
 class ArrayItem {
   List<Item> items;
