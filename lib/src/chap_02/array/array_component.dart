@@ -126,9 +126,14 @@ class ArrayComponent implements OnInit {
         }
         return;
       case 3:
+        message = 'Insertion complete. Total items ${arrayItem.numberOfElements}';
+        _codePart = 4;
+        break;  
+      case 4:
         indexList = 0;
         _codePart = 1;
         message = initialMessage;
+        break;
     }
   }
 
