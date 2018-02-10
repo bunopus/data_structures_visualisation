@@ -3,6 +3,8 @@ import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
 
 import 'src/chap_02/array/array_component.dart';
+import 'src/chap_02/order_array/order_array_component.dart';
+
 import 'src/material-footer/material_footer_component.dart';
 import 'src/home/home_component.dart';
 
@@ -22,15 +24,20 @@ import 'src/home/home_component.dart';
 )
 @RouteConfig(const [
   const Route(
+    path: '/',
+    name: 'Home',
+    component: HomeComponent
+  ),
+  const Route(
     path: '/chap02/array',
     name: 'Chap02Array',
     component: ArrayComponent
   ),
   const Route(
-    path: '/',
-    name: 'Home',
-    component: HomeComponent
-  )
+    path: '/chap02/order_array',
+    name: 'Chap02OrderArray',
+    component: OrderArrayComponent
+  ),
 ])
 class AppComponent {
   bool end = false;

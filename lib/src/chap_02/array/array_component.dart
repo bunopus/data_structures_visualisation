@@ -58,11 +58,8 @@ class ArrayComponent implements OnInit {
         }
         return;
       case 3:
-        for (int i = 0; i < _totalArraySize; i++) {
-          arrayItem = new ArrayItem(_totalArraySize);
-          message =
-              'New array created; total items ${arrayItem.numberOfElements}';
-        }
+        arrayItem = new ArrayItem(_totalArraySize);
+        message = 'New array created; total items ${arrayItem.numberOfElements}';
         _codePart = 4;
         return;
       case 4:
