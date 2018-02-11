@@ -34,6 +34,12 @@ class OrderArrayComponent {
   int oldLB;
   int oldUB;
 
+  Item tempItem;
+
+  bool noShiftsYet;
+
+  int insertPoint;
+
   OrderArrayComponent() {
     message = initialMessage;
     _codePart = 1;
@@ -78,13 +84,21 @@ class OrderArrayComponent {
   void insertArray() {
     switch (_codePart) {
       case 1:
+        oldCurIn = curIn;
+        curIn = 0;
         message = 'Enter key of item to insert';
         _codePart = 2;
         return;
       case 2:
         try {
           insertItem = int.parse(userInput);
-          orderedArray.insertToArray(insertItem);
+          tempItem = new Item(insertItem);
+          message = 'Will insert item with key $insertItem';
+
+          lowerBound = 0;
+          upperBound = orderedArray.numberOfElements - 1;
+          oldCurIn = curIn;
+          curIn = ((upperBound - lowerBound) ~/ 2);
           _codePart = 3;
         } catch (error) {
           message = errorMessage;
@@ -92,14 +106,76 @@ class OrderArrayComponent {
         }
         return;
       case 3:
-        message = 'Insertion complete Total items ${orderedArray.numberOfElements}';
-        _codePart = 4;
+        if (curIn >= orderedArray.numberOfElements) {
+          orderedArray.items[curIn] = tempItem;
+          indexList = curIn;
+          message = 'Insertion item $insertItem at index $curIn';
+          _codePart = 6;
+        } else {
+          if (orderedArray.items[curIn].number == insertItem) {
+            message = "Can't insert: Duplicate at $curIn";
+            oldLB = (this.oldUB = -1);
+            _codePart = 7;
+          } else if (lowerBound > upperBound) {
+            if (orderedArray.items[curIn].number < insertItem) {
+              oldCurIn = curIn;
+              curIn += 1;
+            }
+            message = 'Will insert at index $curIn, following shift';
+            noShiftsYet = true;
+            insertPoint = curIn;
+            oldLB = (this.oldUB = -1);
+            _codePart = 4;
+          } else {
+            oldLB = lowerBound;
+            oldLB = upperBound;
+            oldCurIn = curIn;
+            curIn = (lowerBound + (upperBound - lowerBound) ~/2);
+            indexList = curIn;          
+            message = 'Cheking index $curIn, range $lowerBound to $upperBound';
+
+            if (orderedArray.items[curIn].number < insertItem) {
+              lowerBound = (curIn + 1);
+            } else {
+              upperBound = (curIn - 1);
+            }
+            _codePart = 3;
+          }
+        }
         return;
       case 4:
-        indexList = 0;
-        _codePart = 1;
+        if (noShiftsYet) {
+          noShiftsYet = false;
+          message = 'Will shift cells to make room';
+          oldCurIn = curIn;
+          curIn = orderedArray.numberOfElements;
+          indexList = curIn;
+          _codePart = 4;
+        } else if (curIn == insertPoint) {
+          orderedArray.items[curIn] = tempItem;
+          message = 'Have inserted item $insertItem at index $curIn';
+          _codePart = 6;
+        } else {
+          orderedArray.items[curIn] = orderedArray.items[(curIn - 1)];
+          orderedArray.items[(curIn - 1)] = null;
+          oldCurIn = curIn;
+          curIn -= 1;
+          indexList = curIn;          
+          message = 'Shifted item from index $curIn';
+          _codePart = 4;
+        }
+        return;
+      case 6: 
+        message = 'Insertion completed total items = ${orderedArray.numberOfElements}';
+        _codePart = 7;
+        return;
+      case 7:
+        oldCurIn = curIn;
+        curIn = 0;
         message = initialMessage;
-        return;    
+        indexList = curIn;        
+        _codePart = 1;  
+        return;
     }
   }
   void findItem() {
