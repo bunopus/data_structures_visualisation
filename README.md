@@ -1,4 +1,6 @@
-# Dart Workshop Lafore
+# Dart Workshop Lafore 
+
+WORK IN PROGRESS
 
 ## What is that?
 This is a realization workshops from [Data Structures & Algorithms in Java by LaFore](http://www.amazon.com/Data-Structures-Algorithms-Java-Edition/dp/0672324539)

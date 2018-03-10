@@ -1,0 +1,27 @@
+<div class="button-wrapper">
+  <material-button raised class="blue" (click)="newArray()">New</material-button>
+  <material-button raised class="green" (click)="fillArray()">Fill</material-button>
+  <material-button raised class="yellow" (click)="insertArray()">Insert</material-button>
+  <material-button raised class="indigo" (click)="findItem()">Find</material-button>
+  <material-button raised class="red" (click)="deleteItem()">Delete</material-button>
+</div>
+
+<div class="input-message-wrapper">
+  <div class="flex-item input-wrapper">
+    <material-input label="Write Your Number" [(ngModel)]="userInput"></material-input>
+  </div>
+  <div class="flex-item message">
+    <p>{{message}}</p>
+  </div>
+</div>
+
+<div class="items-wrapper">
+  <div class="each-item" *ngFor="let item of orderedArray.items; let i=index">
+    <span class="item-index">{{i}}</span>
+    <span class="item" *ngIf="item == null"></span>
+    <span class="item" *ngIf="item !== null" [ngStyle]="{'background-color': item.color}">
+      {{item.number}}
+    </span>
+    <i class="arrow material-icons" *ngIf="indexList == i">arrow_back</i>
+  </div>
+</div>

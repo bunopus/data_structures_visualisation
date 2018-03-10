@@ -1,27 +1,88 @@
-.image {
-  background: url(https://webdev.dartlang.org/assets/angulardart-5e7ebca88c5584b1da301f9f9e61d1e7d4f0688b6a9222991cde3bada950088c.svg) no-repeat center center;
-  background-size: cover;
-  width: 300px;
-  height: 300px;
+@import 'package:angular_components/css/material/material';
+@import 'package:angular_components/material_button/mixins';
+
+$raised: 'material-button[raised]';
+$not-raised: 'material-button:not([raised])';
+
+@include button-background-color($raised + '.accent', $mat-pink-500);
+@include button-color($raised + '.accent', $mat-white);
+
+.header-background {
+  overflow: hidden;
+  background: #3f51b5;
 }
 
-.text {
-  font-size: 90px;
-  position: relative;
-  left: -30px
+.header-section {
+  text-align: center;
+  padding-top: 60px;
 }
 
-.flex-container {
+.header-headline {
+  color: #fff;
+  h1 {
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 56px;
+    margin: 15px 5px;
+  }
+  h2 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    margin: 15px 0 25px;
+  }
+}
+
+.header-start {
+  text-align: center;
+  margin: 60px 0;
+}
+
+.wshop-homepage-promo {
+  align-items: center;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-content: flex-start;
-  align-items: flex-start;
+  flex-direction: column;
+  padding: 16px;
 }
 
-.flex-item {
-  order: 0;
-  flex: 0 1 auto;
-  align-self: center;
+.wshop-homepage-row {
+  display: flex;
+  width: 920px;
+  margin: 60px 0;
+  color: rgba(0,0,0,.54);
+}
+
+.wshop-homepage-reverse-row {
+  flex-direction: row-reverse;
+}
+
+.wshop-homepage-promo-img {
+  text-align: center;
+  width: 50%;
+}
+
+.wshop-homepage-promo-desc {
+  width: 50%;
+  line-height: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0 0 16px;
+    padding: 0;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    margin: 0 0 24px;
+    padding: 0;
+    span.bold {
+      font-weight: bold;
+    }
+  }
 }

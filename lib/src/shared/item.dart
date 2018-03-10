@@ -8,11 +8,11 @@ class Item {
 
   Item([int number = null]) {
     Random random = new Random();
-    HexColor _color = new Color.rgb(
-        random.nextInt(255),
-        random.nextInt(255),
-        random.nextInt(255))
-        .toHexColor();
+    int i = 100 + (random.nextDouble() * 154.0).toInt();
+    int j = 100 + (random.nextDouble() * 154.0).toInt();
+    int k = 100 + (random.nextDouble() * 154.0).toInt();
+
+    HexColor _color = new Color.rgb(i, j, k).toHexColor();
     if (number == null) {
       this.number = random.nextInt(1000);
     } else {
