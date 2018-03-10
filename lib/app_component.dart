@@ -1,3 +1,4 @@
+import 'package:DartWorkshopLafore/src/shared/menu.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular_router/angular_router.dart';
@@ -7,6 +8,8 @@ import 'src/chap_02/order_array/order_array_component.dart';
 
 import 'src/material-footer/material_footer_component.dart';
 import 'src/home/home_component.dart';
+
+import 'dart:html';
 
 @Component(
   selector: 'my-app',
@@ -18,7 +21,8 @@ import 'src/home/home_component.dart';
   directives: const [
     materialDirectives,
     ROUTER_DIRECTIVES,
-    FooterComponent
+    FooterComponent,
+    COMMON_DIRECTIVES
   ],
   providers: const [materialProviders],
 )
@@ -42,4 +46,18 @@ import 'src/home/home_component.dart';
 class AppComponent {
   bool end = false;
   bool overlay = false;
+  final List<ChapterMenu> chapterMenuList = 
+    new List.from([
+      new Chapter('Chapter 2',
+        new List<Menu>.from([
+          new Menu('Array', 'Chap02Array'),
+          new Menu('Ordered Array', 'Chap02OrderArray'),
+        ])
+      )
+    ]);
+
+  AppComponent() {
+    window.console.log(chapterMenuList);
+    print(chapterMenuList);
+  }
 }

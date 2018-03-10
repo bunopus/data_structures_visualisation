@@ -8,10 +8,14 @@
         <material-icon icon="home"></material-icon>Home
       </material-list-item>
       <div group>
-        <div label>Chapter 2</div>
-        <material-list-item [routerLink]="['Chap02Array']">
-          <material-icon icon="reorder"></material-icon>Array
-        </material-list-item>
+        <template ngFor let-menu [ngForOf]="chapterMenuList">
+          <div label>{{menu.name}}</div>
+          <template ngFor let-menuItem [ngForOf]="menu.menuItems">
+            <material-list-item [routerLink]="[menuItem.url]">
+              <material-icon icon="reorder"></material-icon>{{menuItem.name}}
+            </material-list-item>
+          </template>
+        </template>
       </div>
     </div>
   </material-list>
