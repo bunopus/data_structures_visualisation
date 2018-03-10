@@ -5,6 +5,11 @@ body, p {
   margin: 0;
 }
 
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility
+}
+
 * {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
