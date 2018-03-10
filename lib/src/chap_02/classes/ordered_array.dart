@@ -8,8 +8,8 @@ class OrderedArray extends BaseArray {
     items = new List<Item>(this.size);
     for (int i = 0; i < fillSize; i ++) {
       items[i] = new Item();
-      numberOfElements ++;
     }
+    numberOfElements = fillSize;
     _insertionSort();
   }
 
