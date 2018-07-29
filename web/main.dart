@@ -1,12 +1,14 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:DartWorkshopLafore/app_component.template.dart' as ng;
 
-import 'package:DartWorkshopLafore/app_component.dart';
+import 'main.template.dart' as self;
+
+@GenerateInjector(
+  routerProvidersHash, // You can use routerProviders in production
+)
+final InjectorFactory injector = self.injector$Injector;
 
 void main() {
-  bootstrap(AppComponent, [
-    ROUTER_PROVIDERS,
-    // Remove next line in production
-    provide(LocationStrategy, useClass: HashLocationStrategy),
-  ]);
+  runApp(ng.AppComponentNgFactory, createInjector: injector);
 }

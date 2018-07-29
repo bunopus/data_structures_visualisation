@@ -11,7 +11,7 @@ import '../classes/array_item.dart';
     directives: const [
       MaterialButtonComponent,
       materialInputDirectives,
-      CORE_DIRECTIVES,
+      coreDirectives,
     ])
 class ArrayComponent implements OnInit {
   ArrayItem arrayItem;

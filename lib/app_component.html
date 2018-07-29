@@ -1,38 +1,41 @@
-<material-drawer temporary #drawer="drawer"
-                 [attr.end]="end ? '' : null"
-                 [attr.overlay]="overlay ? '' : null">
-  <material-list *deferredContent>
-    <div group class="mat-drawer-spacer"></div>
-    <div group>
-      <material-list-item [routerLink]="['Home']">
-        <material-icon icon="home"></material-icon>Home
-      </material-list-item>
-      <div group>
-        <template ngFor let-menu [ngForOf]="chapterMenuList">
-          <div label>{{menu.name}}</div>
-          <template ngFor let-menuItem [ngForOf]="menu.menuItems">
-            <material-list-item [routerLink]="[menuItem.url]">
-              <material-icon icon="reorder"></material-icon>{{menuItem.name}}
-            </material-list-item>
-          </template>
-        </template>
-      </div>
-    </div>
-  </material-list>
-</material-drawer>
+<!--<material-drawer temporary #drawer="drawer"-->
+                 <!--[attr.end]="end ? '' : null"-->
+                 <!--[attr.overlay]="overlay ? '' : null">-->
+  <!--<material-list *deferredContent>-->
+    <!--<div group class="mat-drawer-spacer"></div>-->
+    <!--<div group>-->
+      <!--<material-list-item [routerLink]="['Home']">-->
+        <!--<material-icon icon="home"></material-icon>Home-->
+      <!--</material-list-item>-->
+      <!--<div group>-->
+        <!--<template ngFor let-menu [ngForOf]="chapterMenuList">-->
+          <!--<div label>{{menu.name}}</div>-->
+          <!--<template ngFor let-menuItem [ngForOf]="menu.menuItems">-->
+            <!--<material-list-item [routerLink]="[menuItem.url]">-->
+              <!--<material-icon icon="reorder"></material-icon>{{menuItem.name}}-->
+            <!--</material-list-item>-->
+          <!--</template>-->
+        <!--</template>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</material-list>-->
+<!--</material-drawer>-->
 
-<div class="page-wrap">
-  <header class="material-header shadow">
-    <div class="material-header-row">
-      <material-button class="material-drawer-button" icon (trigger)="drawer.toggle()">
-        <material-icon icon="menu"></material-icon>
-      </material-button>
-      <span class="material-header-title">Algorithms</span>
-    </div>
-  </header>
-  <material-content>
-    <router-outlet></router-outlet>
-  </material-content>
-  <material-footer></material-footer>
-</div>
+<!--<div class="page-wrap">-->
+  <!--<header class="material-header shadow">-->
+    <!--<div class="material-header-row">-->
+      <!--<material-button class="material-drawer-button" icon (trigger)="drawer.toggle()">-->
+        <!--<material-icon icon="menu"></material-icon>-->
+      <!--</material-button>-->
+      <!--<span class="material-header-title">Algorithms</span>-->
+    <!--</div>-->
+  <!--</header>-->
+  <!--<material-content>-->
+    <!--<router-outlet [routes]="routes.all"></router-outlet>-->
+  <!--</material-content>-->
+  <!--<material-footer></material-footer>-->
+<!--</div>-->
 
+<material-content>
+  <router-outlet [routes]="routes.all"></router-outlet>
+</material-content>

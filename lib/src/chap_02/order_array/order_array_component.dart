@@ -14,7 +14,7 @@ import 'package:DartWorkshopLafore/src/shared/item.dart';
     directives: const [
       MaterialButtonComponent,
       materialInputDirectives,
-      CORE_DIRECTIVES,
+      coreDirectives,
     ])
 class OrderArrayComponent {
   OrderedArray orderedArray;
@@ -145,7 +145,7 @@ class OrderArrayComponent {
         _codePart = 2;
         return;
       case 2:
-        insertItem = int.parse(userInput, onError: (source) => null);
+        insertItem = int.parse(userInput);
         if (insertItem == null) {
           message = errorMessage;
           _codePart = 1;
