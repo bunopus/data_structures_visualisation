@@ -12,7 +12,8 @@ class Routes {
   RoutePath get chap02_order_array => paths.chap02_order_array;
 
   final List<RouteDefinition> all = [
-    RouteDefinition.redirect(path: '', redirectTo: paths.home.toUrl()),
+// FIXME this causing endless loop. It's redirect from '' to home which is '' too
+//    RouteDefinition.redirect(path: '', redirectTo: paths.home.toUrl()),
     RouteDefinition(
       path: paths.home.path,
       component: hctl.HomeComponentNgFactory,
